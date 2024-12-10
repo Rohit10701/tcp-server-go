@@ -21,7 +21,7 @@ func handleConnection(conn net.Conn) {
 	fmt.Printf("client connected: %s\n", conn.RemoteAddr().String())
 
 	reader := bufio.NewReader(conn)
-
+	fmt.Println("reader", reader)
 	for {
 		message, err := reader.ReadString('\n')
 		if err != nil {
@@ -55,6 +55,9 @@ func main() {
 			fmt.Println("error accepting connection:", err)
 			continue
 		}
+
+		fmt.Println("network conn", conn.RemoteAddr().Network())
+		fmt.Println("conn", conn.RemoteAddr().String())
 
 		go handleConnection(conn)
 	}
